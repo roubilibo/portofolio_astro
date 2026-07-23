@@ -1,0 +1,108 @@
+---
+import { Download, Github, Linkedin, Menu, Moon, Sun, X } from "lucide-astro";
+import { navItems, siteConfig } from "@/config/site";
+---
+
+<header class="sticky top-0 z-50 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--background),transparent_8%)] backdrop-blur">
+  <nav class="container-page flex min-h-16 items-center justify-between gap-4" aria-label="Navigasi utama">
+    <a href="/" class="text-base font-bold tracking-[0] text-[var(--text)]" aria-label="Roubil Ridlo beranda">
+      Roubil Ridlo
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      {navItems.map((item) => (
+        <a class="rounded-md px-3 py-2 text-sm font-semibold text-muted transition hover:text-[var(--text)]" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden items-center gap-2 md:flex">
+      <button
+        type="button"
+        data-theme-toggle
+        class="inline-flex size-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] transition hover:border-[var(--accent)]"
+        aria-label="Ganti tema warna"
+      >
+        <Sun class="hidden size-4 dark:block" aria-hidden="true" />
+        <Moon class="size-4 dark:hidden" aria-hidden="true" />
+      </button>
+      <a
+        href={siteConfig.cvUrl}
+        class="inline-flex items-center gap-2 rounded-md bg-[var(--text)] px-4 py-2 text-sm font-bold text-white transition hover:opacity-85 dark:text-[var(--background)]"
+      >
+        <Download class="size-4" aria-hidden="true" />
+        Unduh CV
+      </a>
+    </div>
+
+    <button
+      type="button"
+      data-menu-toggle
+      class="inline-flex size-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface)] md:hidden"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <Menu data-menu-open-icon class="size-5" aria-hidden="true" />
+      <X data-menu-close-icon class="hidden size-5" aria-hidden="true" />
+    </button>
+  </nav>
+
+  <div id="mobile-menu" data-mobile-menu class="hidden border-t border-[var(--border)] bg-[var(--background)] md:hidden">
+    <div class="container-page flex flex-col gap-2 py-4">
+      {navItems.map((item) => (
+        <a class="rounded-md px-3 py-3 text-sm font-semibold text-muted hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+      <div class="mt-2 flex items-center gap-2">
+        <button
+          type="button"
+          data-theme-toggle
+          class="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] text-sm font-bold"
+          aria-label="Ganti tema warna"
+        >
+          <Sun class="hidden size-4 dark:block" aria-hidden="true" />
+          <Moon class="size-4 dark:hidden" aria-hidden="true" />
+          Tema
+        </button>
+        <a href={siteConfig.cvUrl} class="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-md bg-[var(--text)] px-4 text-sm font-bold text-white dark:text-[var(--background)]">
+          <Download class="size-4" aria-hidden="true" />
+          CV
+        </a>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <a class="inline-flex size-10 items-center justify-center rounded-md border border-[var(--border)]" href={siteConfig.github} aria-label="GitHub">
+          <Github class="size-4" aria-hidden="true" />
+        </a>
+        <a class="inline-flex size-10 items-center justify-center rounded-md border border-[var(--border)]" href={siteConfig.linkedin} aria-label="LinkedIn">
+          <Linkedin class="size-4" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const storageKey = "roubil-theme";
+  const toggles = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
+  const menuToggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const mobileMenu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+  const openIcon = document.querySelector<HTMLElement>("[data-menu-open-icon]");
+  const closeIcon = document.querySelector<HTMLElement>("[data-menu-close-icon]");
+
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem(storageKey, isDark ? "dark" : "light");
+    });
+  });
+
+  menuToggle?.addEventListener("click", () => {
+    const isOpening = mobileMenu?.classList.toggle("hidden") === false;
+    menuToggle.setAttribute("aria-expanded", String(isOpening));
+    openIcon?.classList.toggle("hidden", isOpening);
+    closeIcon?.classList.toggle("hidden", !isOpening);
+  });
+</script>

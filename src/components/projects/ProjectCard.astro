@@ -1,0 +1,57 @@
+---
+import { ArrowUpRight, Github } from "lucide-astro";
+import type { CollectionEntry } from "astro:content";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+---
+
+<article class="surface-card flex h-full flex-col rounded-lg p-5">
+  <div class="mb-5 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--surface-muted)]">
+    <img src={data.coverImage} alt={data.coverAlt} loading="lazy" class="aspect-[16/9] w-full object-cover" />
+  </div>
+  <div class="flex flex-1 flex-col">
+    <p class="text-sm font-bold text-[var(--accent-strong)]">{data.category}</p>
+    <h3 class="mt-2 text-xl font-bold">{data.title}</h3>
+    <p class="mt-3 text-sm leading-6 text-muted">{data.summary}</p>
+    <dl class="mt-5 grid gap-3 text-sm">
+      <div>
+        <dt class="font-bold">Masalah</dt>
+        <dd class="mt-1 text-muted">{data.problem}</dd>
+      </div>
+      <div>
+        <dt class="font-bold">Peran</dt>
+        <dd class="mt-1 text-muted">{data.role}</dd>
+      </div>
+      <div>
+        <dt class="font-bold">Tantangan utama</dt>
+        <dd class="mt-1 text-muted">{data.challenges[0]}</dd>
+      </div>
+    </dl>
+    <div class="mt-5 flex flex-wrap gap-2">
+      {data.technologies.slice(0, 5).map((tech) => <span class="badge">{tech}</span>)}
+    </div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <ButtonLink href={`/projects/${data.slug}/`}>
+        Lihat Studi Kasus
+        <ArrowUpRight class="size-4" aria-hidden="true" />
+      </ButtonLink>
+      {data.repositoryUrl && (
+        <ButtonLink href={data.repositoryUrl} variant="secondary">
+          <Github class="size-4" aria-hidden="true" />
+          Repository
+        </ButtonLink>
+      )}
+      {data.demoUrl && (
+        <ButtonLink href={data.demoUrl} variant="secondary">
+          Demo
+        </ButtonLink>
+      )}
+    </div>
+  </div>
+</article>

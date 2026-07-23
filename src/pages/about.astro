@@ -1,0 +1,31 @@
+---
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
+import TechnologyGroups from "@/components/sections/TechnologyGroups.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { siteConfig } from "@/config/site";
+---
+
+<BaseLayout title="Tentang Saya - Roubil Ridlo" description="Profil M. Roubil Ridlo sebagai Full-stack Web Developer.">
+  <section class="container-page section-padding">
+    <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p class="badge">Tentang saya</p>
+        <h1 class="mt-4 text-4xl font-black tracking-[0] md:text-5xl">{siteConfig.name}</h1>
+        <p class="mt-3 text-xl font-bold text-[var(--accent-strong)]">{siteConfig.position}</p>
+      </div>
+      <div class="grid gap-5 text-base leading-8 text-muted">
+        <p>
+          Saya adalah Full-stack Web Developer yang berpengalaman membangun aplikasi frontend dan backend untuk kebutuhan administrasi, sistem informasi, dan operasional. Saya terbiasa bekerja dengan REST API, autentikasi, pengelolaan role, state aplikasi, serta integrasi database relasional.
+        </p>
+        <p>
+          Di sisi database, saya sering bekerja dengan query SQL, relasi tabel, rekap data, dan investigasi bottleneck. Di sisi deployment, saya pernah menangani Docker, Nginx, VPS, reverse proxy, dan Google Cloud Platform.
+        </p>
+        <p>
+          Saya menyukai proses debugging, optimasi, dan perbaikan arsitektur aplikasi karena pekerjaan tersebut menuntut pemahaman menyeluruh dari UI, API, database, sampai konfigurasi server. Saat ini saya terus mempelajari backend, infrastructure, dan system design.
+        </p>
+      </div>
+    </div>
+  </section>
+  <ExperienceTimeline />
+  <TechnologyGroups />
+</BaseLayout>

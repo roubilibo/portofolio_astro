@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-muted: #eef6fb;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --border: #dbe7ef;
+  --accent: #0e7490;
+  --accent-strong: #1d4ed8;
+  --accent-soft: #d9f5fb;
+  --ring: #0891b2;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --background: #08111f;
+  --surface: #0d1b2e;
+  --surface-muted: #13243a;
+  --text: #e6eef8;
+  --text-muted: #9fb2c8;
+  --border: #253954;
+  --accent: #22d3ee;
+  --accent-strong: #60a5fa;
+  --accent-soft: #12384b;
+  --ring: #67e8f9;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft), transparent 32%), transparent 34rem),
+    var(--background);
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.container-page {
+  width: min(100% - 2rem, 1240px);
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.surface-card {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface), transparent 2%);
+  box-shadow: 0 14px 36px rgb(15 23 42 / 0.06);
+}
+
+.dark .surface-card {
+  box-shadow: 0 18px 42px rgb(0 0 0 / 0.2);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.animate-in {
+  animation: fade-up 560ms ease both;
+}
+
+@keyframes fade-up {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

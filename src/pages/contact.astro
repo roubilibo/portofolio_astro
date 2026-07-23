@@ -1,0 +1,47 @@
+---
+import { Download, Github, Linkedin, Mail, MapPin, MessageCircle } from "lucide-astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { siteConfig } from "@/config/site";
+---
+
+<BaseLayout title="Kontak - Roubil Ridlo" description="Hubungi M. Roubil Ridlo untuk kebutuhan full-stack web development, backend, deployment, dan optimasi aplikasi.">
+  <section class="container-page section-padding">
+    <div class="max-w-3xl">
+      <p class="badge">Kontak</p>
+      <h1 class="mt-4 text-4xl font-black tracking-[0] md:text-5xl">Mari diskusikan kebutuhan sistem Anda</h1>
+      <p class="mt-5 leading-8 text-muted">{siteConfig.availability}</p>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={`mailto:${siteConfig.email}`}>
+        <Mail class="size-6 text-[var(--accent)]" aria-hidden="true" />
+        <h2 class="mt-4 text-xl font-bold">Email</h2>
+        <p class="mt-2 break-words text-muted">{siteConfig.email}</p>
+      </a>
+      <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.whatsapp}>
+        <MessageCircle class="size-6 text-[var(--accent)]" aria-hidden="true" />
+        <h2 class="mt-4 text-xl font-bold">WhatsApp</h2>
+        <p class="mt-2 text-muted">Ganti placeholder nomor di konfigurasi situs.</p>
+      </a>
+      <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.github}>
+        <Github class="size-6 text-[var(--accent)]" aria-hidden="true" />
+        <h2 class="mt-4 text-xl font-bold">GitHub</h2>
+        <p class="mt-2 text-muted">Repository dan pekerjaan teknis.</p>
+      </a>
+      <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.linkedin}>
+        <Linkedin class="size-6 text-[var(--accent)]" aria-hidden="true" />
+        <h2 class="mt-4 text-xl font-bold">LinkedIn</h2>
+        <p class="mt-2 text-muted">Profil profesional dan koneksi kerja.</p>
+      </a>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <span class="inline-flex items-center gap-2 text-sm text-muted"><MapPin class="size-4" aria-hidden="true" /> {siteConfig.location}</span>
+      <ButtonLink href={siteConfig.cvUrl} variant="secondary">
+        <Download class="size-4" aria-hidden="true" />
+        Unduh CV
+      </ButtonLink>
+    </div>
+  </section>
+</BaseLayout>

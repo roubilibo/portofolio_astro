@@ -1,0 +1,89 @@
+---
+import Footer from "@/components/layout/Footer.astro";
+import Navbar from "@/components/layout/Navbar.astro";
+import { siteConfig } from "@/config/site";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title = `${siteConfig.displayName} - ${siteConfig.position}`,
+  description = siteConfig.description,
+  image = "/images/og-cover.svg",
+  type = "website",
+  structuredData = [],
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
+const absoluteImage = new URL(image, siteConfig.url).toString();
+const schema = Array.isArray(structuredData) ? structuredData : [structuredData];
+const baseSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    alternateName: siteConfig.nickname,
+    jobTitle: siteConfig.position,
+    url: siteConfig.url,
+    email: siteConfig.email,
+    sameAs: [siteConfig.github, siteConfig.linkedin],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "ID",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: `${siteConfig.displayName} Portfolio`,
+    url: siteConfig.url,
+    inLanguage: "id-ID",
+  },
+  ...schema,
+];
+---
+
+<!doctype html>
+<html lang="id" class="scroll-pt-24">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <script is:inline>
+      (() => {
+        const storageKey = "roubil-theme";
+        const stored = localStorage.getItem(storageKey);
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = stored ?? (prefersDark ? "dark" : "light");
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

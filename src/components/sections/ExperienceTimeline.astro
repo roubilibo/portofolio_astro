@@ -1,0 +1,37 @@
+---
+import { experiences } from "@/data/experience";
+---
+
+<section class="section-padding">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p class="badge">Pengalaman</p>
+      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">Pekerjaan yang berfokus pada sistem administrasi dan operasional</h2>
+    </div>
+    <div class="mt-10 grid gap-5">
+      {experiences.map((experience) => (
+        <article class="surface-card rounded-lg p-6">
+          <div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h3 class="text-xl font-bold">{experience.position}</h3>
+              <p class="mt-1 font-semibold text-[var(--accent-strong)]">{experience.company}</p>
+            </div>
+            <p class="badge">{experience.period}</p>
+          </div>
+          <p class="mt-4 leading-7 text-muted">{experience.description}</p>
+          <ul class="mt-5 grid gap-2">
+            {experience.contributions.map((item) => (
+              <li class="flex gap-3 text-sm leading-6 text-muted">
+                <span class="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {experience.technologies.map((tech) => <span class="badge">{tech}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

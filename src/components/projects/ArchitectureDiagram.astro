@@ -1,0 +1,20 @@
+---
+interface Props {
+  nodes: string[];
+}
+
+const { nodes } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4" aria-label="Diagram arsitektur sistem">
+  <ol class="flex min-w-max items-center gap-3 md:min-w-0 md:flex-wrap">
+    {nodes.map((node, index) => (
+      <>
+        <li class="rounded-md border border-[var(--border)] bg-[var(--surface-muted)] px-4 py-3 text-sm font-bold text-[var(--text)]">
+          {node}
+        </li>
+        {index < nodes.length - 1 && <li class="text-xl text-[var(--accent)]" aria-hidden="true">→</li>}
+      </>
+    ))}
+  </ol>
+</div>

@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects")).sort((a, b) => Number(b.data.year) - Number(a.data.year));
+---
+
+<BaseLayout title="Proyek - Roubil Ridlo" description="Daftar studi kasus proyek M. Roubil Ridlo sebagai Full-stack Web Developer.">
+  <section class="container-page section-padding">
+    <div class="max-w-3xl">
+      <p class="badge">Daftar proyek</p>
+      <h1 class="mt-4 text-4xl font-black tracking-[0] md:text-5xl">Studi kasus proyek</h1>
+      <p class="mt-5 leading-8 text-muted">
+        Kumpulan pekerjaan yang mencakup pengembangan full-stack, backend, database, deployment, debugging, dan optimasi performa.
+      </p>
+    </div>
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

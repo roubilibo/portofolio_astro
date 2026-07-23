@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import AboutPreview from "@/components/sections/AboutPreview.astro";
+import Capabilities from "@/components/sections/Capabilities.astro";
+import ContactCta from "@/components/sections/ContactCta.astro";
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
+import Hero from "@/components/sections/Hero.astro";
+import TechnologyGroups from "@/components/sections/TechnologyGroups.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.featured)
+  .sort((a, b) => Number(b.data.year) - Number(a.data.year))
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <Hero />
+  <Capabilities />
+  <section class="section-padding">
+    <div class="container-page">
+      <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div class="max-w-2xl">
+          <p class="badge">Proyek unggulan</p>
+          <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">Studi kasus dari pekerjaan nyata</h2>
+          <p class="mt-4 leading-7 text-muted">Setiap proyek menjelaskan konteks, masalah, keputusan teknis, tantangan, dan hasil tanpa klaim yang tidak terukur.</p>
+        </div>
+        <ButtonLink href="/projects/" variant="secondary">Semua Proyek</ButtonLink>
+      </div>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+  <ExperienceTimeline />
+  <TechnologyGroups />
+  <AboutPreview />
+  <ContactCta />
+</BaseLayout>

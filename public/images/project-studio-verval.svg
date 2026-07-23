@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Studio Verval workflow visual">
+  <rect width="960" height="540" fill="#f8fafc"/>
+  <rect x="72" y="78" width="816" height="384" rx="22" fill="#ffffff" stroke="#dbe7ef"/>
+  <g fill="#eef6fb" stroke="#cfe2ec">
+    <rect x="130" y="205" width="125" height="85" rx="14"/>
+    <rect x="305" y="205" width="125" height="85" rx="14"/>
+    <rect x="480" y="205" width="125" height="85" rx="14"/>
+    <rect x="655" y="205" width="175" height="85" rx="14"/>
+  </g>
+  <g stroke="#0e7490" stroke-width="8" stroke-linecap="round">
+    <path d="M260 247h38"/>
+    <path d="M435 247h38"/>
+    <path d="M610 247h38"/>
+  </g>
+  <g fill="#0f172a" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">
+    <text x="192" y="254">Draft</text>
+    <text x="367" y="254">Submit</text>
+    <text x="542" y="254">Review</text>
+    <text x="742" y="254">Diterima</text>
+  </g>
+  <text x="130" y="150" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="30" font-weight="800">Studio Verval</text>
+  <text x="130" y="355" fill="#475569" font-family="Arial, sans-serif" font-size="22">Pengajuan, role, verifikasi, revisi, dan query server.</text>
+</svg>

@@ -1,0 +1,171 @@
+---
+import { getCollection } from "astro:content";
+import ArchitectureDiagram from "@/components/projects/ArchitectureDiagram.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { siteConfig } from "@/config/site";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const projects = (await getCollection("projects")).sort((a, b) => Number(b.data.year) - Number(a.data.year));
+const currentIndex = projects.findIndex((item) => item.data.slug === project.data.slug);
+const previousProject = currentIndex > 0 ? projects[currentIndex - 1] : undefined;
+const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : undefined;
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: project.data.title,
+  description: project.data.summary,
+  url: `${siteConfig.url}/projects/${project.data.slug}/`,
+  creator: {
+    "@type": "Person",
+    name: siteConfig.name,
+  },
+};
+---
+
+<BaseLayout
+  title={`${project.data.title} - Studi Kasus Roubil Ridlo`}
+  description={project.data.summary}
+  image={project.data.coverImage}
+  type="article"
+  structuredData={projectSchema}
+>
+  <article class="container-page section-padding">
+    <nav aria-label="Breadcrumb" class="text-sm text-muted">
+      <a class="hover:text-[var(--accent)]" href="/">Beranda</a>
+      <span aria-hidden="true"> / </span>
+      <a class="hover:text-[var(--accent)]" href="/projects/">Proyek</a>
+      <span aria-hidden="true"> / </span>
+      <span>{project.data.title}</span>
+    </nav>
+
+    <header class="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-start">
+      <div>
+        <p class="badge">{project.data.category}</p>
+        <h1 class="mt-5 text-4xl font-black tracking-[0] md:text-6xl">{project.data.title}</h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">{project.data.summary}</p>
+      </div>
+      <dl class="surface-card grid gap-4 rounded-lg p-5 sm:grid-cols-3 lg:grid-cols-1">
+        <div>
+          <dt class="text-sm font-bold text-muted">Tahun</dt>
+          <dd class="mt-1 font-bold">{project.data.year}</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-bold text-muted">Peran</dt>
+          <dd class="mt-1 font-bold">{project.data.role}</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-bold text-muted">Status</dt>
+          <dd class="mt-1 font-bold">{project.data.status}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <div class="mt-8 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-muted)]">
+      <img src={project.data.coverImage} alt={project.data.coverAlt} class="aspect-[16/7] w-full object-cover" />
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-2">
+      {project.data.technologies.map((tech) => <span class="badge">{tech}</span>)}
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+      <aside class="lg:sticky lg:top-24 lg:self-start">
+        <div class="surface-card rounded-lg p-5">
+          <h2 class="text-lg font-bold">Ringkasan</h2>
+          <p class="mt-3 text-sm leading-6 text-muted">{project.data.problem}</p>
+        </div>
+      </aside>
+
+      <div class="grid gap-10">
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Latar belakang</h2>
+          <p class="mt-4 leading-8 text-muted">{project.body}</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Permasalahan</h2>
+          <p class="mt-4 leading-8 text-muted">{project.data.problem}</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Tanggung jawab</h2>
+          <ul class="mt-4 grid gap-3">
+            {project.data.responsibilities.map((item) => (
+              <li class="flex gap-3 leading-7 text-muted"><span class="mt-3 size-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Arsitektur sistem</h2>
+          <p class="mt-4 leading-8 text-muted">{project.data.architecture.description}</p>
+          <div class="mt-5">
+            <ArchitectureDiagram nodes={project.data.architecture.nodes} />
+          </div>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Keputusan teknis</h2>
+          <ul class="mt-4 grid gap-3">
+            {project.data.decisions.map((item) => (
+              <li class="flex gap-3 leading-7 text-muted"><span class="mt-3 size-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Tantangan</h2>
+          <ul class="mt-4 grid gap-3">
+            {project.data.challenges.map((item) => (
+              <li class="flex gap-3 leading-7 text-muted"><span class="mt-3 size-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Solusi</h2>
+          <p class="mt-4 leading-8 text-muted">{project.data.solution}</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Hasil</h2>
+          <ul class="mt-4 grid gap-3">
+            {project.data.results.map((item) => (
+              <li class="flex gap-3 leading-7 text-muted"><span class="mt-3 size-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Pelajaran</h2>
+          <ul class="mt-4 grid gap-3">
+            {project.data.lessonsLearned.map((item) => (
+              <li class="flex gap-3 leading-7 text-muted"><span class="mt-3 size-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-black tracking-[0]">Galeri screenshot</h2>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            {project.data.gallery.map((image) => (
+              <figure class="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-muted)]">
+                <img src={image.src} alt={image.alt} loading="lazy" class="aspect-[16/10] w-full object-cover" />
+                <figcaption class="border-t border-[var(--border)] p-3 text-sm text-muted">{image.alt}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <nav class="mt-14 grid gap-4 border-t border-[var(--border)] pt-8 md:grid-cols-2" aria-label="Navigasi proyek">
+      <div>
+        {previousProject && <ButtonLink href={`/projects/${previousProject.data.slug}/`} variant="secondary">← {previousProject.data.title}</ButtonLink>}
+      </div>
+      <div class="md:text-right">
+        {nextProject && <ButtonLink href={`/projects/${nextProject.data.slug}/`} variant="secondary">{nextProject.data.title} →</ButtonLink>}
+      </div>
+    </nav>
+  </article>
+</BaseLayout>

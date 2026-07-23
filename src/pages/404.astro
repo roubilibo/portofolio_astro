@@ -1,0 +1,18 @@
+---
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Halaman Tidak Ditemukan - Roubil Ridlo" description="Halaman yang Anda buka tidak tersedia.">
+  <section class="container-page flex min-h-[70vh] flex-col items-start justify-center py-20">
+    <p class="badge">404</p>
+    <h1 class="mt-5 text-4xl font-black tracking-[0] md:text-6xl">Halaman tidak ditemukan</h1>
+    <p class="mt-5 max-w-xl leading-8 text-muted">
+      URL yang Anda buka tidak tersedia atau sudah dipindahkan. Gunakan navigasi untuk kembali ke halaman utama atau melihat daftar proyek.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <ButtonLink href="/">Kembali ke Beranda</ButtonLink>
+      <ButtonLink href="/projects/" variant="secondary">Lihat Proyek</ButtonLink>
+    </div>
+  </section>
+</BaseLayout>

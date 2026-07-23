@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Portfolio M. Roubil Ridlo">
+  <rect width="1200" height="630" fill="#08111f"/>
+  <rect x="76" y="74" width="1048" height="482" rx="28" fill="#0d1b2e" stroke="#253954"/>
+  <text x="120" y="200" fill="#67e8f9" font-family="Arial, sans-serif" font-size="28" font-weight="700">Full-stack Web Developer</text>
+  <text x="120" y="290" fill="#e6eef8" font-family="Arial, sans-serif" font-size="72" font-weight="800">M. Roubil Ridlo</text>
+  <text x="120" y="355" fill="#9fb2c8" font-family="Arial, sans-serif" font-size="30">Frontend, backend, database, deployment, debugging.</text>
+  <rect x="760" y="155" width="280" height="260" rx="16" fill="#07111f" stroke="#253954"/>
+  <circle cx="790" cy="186" r="8" fill="#f87171"/>
+  <circle cx="818" cy="186" r="8" fill="#fbbf24"/>
+  <circle cx="846" cy="186" r="8" fill="#34d399"/>
+  <path d="M800 250h160M800 292h120M800 334h180" stroke="#67e8f9" stroke-width="12" stroke-linecap="round"/>
+</svg>

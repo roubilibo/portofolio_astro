@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="ERP attendance monitoring visual">
+  <rect width="960" height="540" fill="#08111f"/>
+  <rect x="74" y="70" width="812" height="400" rx="22" fill="#0d1b2e" stroke="#253954"/>
+  <rect x="120" y="130" width="330" height="260" rx="14" fill="#07111f" stroke="#253954"/>
+  <rect x="500" y="130" width="310" height="90" rx="14" fill="#13243a" stroke="#253954"/>
+  <rect x="500" y="250" width="310" height="90" rx="14" fill="#13243a" stroke="#253954"/>
+  <path d="M155 330c45-90 92 40 140-40s78 10 120-60" fill="none" stroke="#67e8f9" stroke-width="10" stroke-linecap="round"/>
+  <path d="M535 175h160M535 295h210" stroke="#60a5fa" stroke-width="12" stroke-linecap="round"/>
+  <text x="120" y="440" fill="#e6eef8" font-family="Arial, sans-serif" font-size="30" font-weight="800">ERP Attendance Optimization</text>
+  <text x="500" y="390" fill="#9fb2c8" font-family="Arial, sans-serif" font-size="22">GET_LOCK, InnoDB, monitoring, Redis plan.</text>
+</svg>
