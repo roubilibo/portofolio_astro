@@ -1,7 +1,8 @@
 ---
 import Footer from "@/components/layout/Footer.astro";
 import Navbar from "@/components/layout/Navbar.astro";
-import { siteConfig } from "@/config/site";
+import { localizedSiteConfig, siteConfig } from "@/config/site";
+import { getLocale } from "@/i18n/utils";
 import "@/styles/global.css";
 
 interface Props {
@@ -19,6 +20,10 @@ const {
 	type = "website",
 	structuredData = [],
 } = Astro.props;
+
+const locale = getLocale(Astro.currentLocale);
+const localizedConfig = localizedSiteConfig[locale];
+const resolvedDescription = description === siteConfig.description ? localizedConfig.description : description;
 
 const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
 const absoluteImage = new URL(image, siteConfig.url).toString();
@@ -45,30 +50,30 @@ const baseSchema = [
 		"@type": "WebSite",
 		name: `${siteConfig.displayName} Portfolio`,
 		url: siteConfig.url,
-		inLanguage: "id-ID",
+        inLanguage: locale === "en" ? "en-US" : "id-ID",
 	},
 	...schema,
 ];
 ---
 
 <!doctype html>
-<html lang="id" class="scroll-pt-24">
+<html lang={locale} class="scroll-pt-24">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={resolvedDescription} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={absoluteImage} />
-    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale" content={locale === "en" ? "en_US" : "id_ID"} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={absoluteImage} />
     <script is:inline>
       (() => {

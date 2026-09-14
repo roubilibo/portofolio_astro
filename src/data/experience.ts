@@ -1,29 +1,11 @@
-export const experiences = [
-  {
-    company: "Instansi / Organisasi Pemerintahan",
-    position: "Full-stack Web Developer",
-    period: "2024 - Sekarang",
-    description:
-      "Membangun dan memelihara aplikasi sistem informasi untuk kebutuhan administrasi, rekap data, dan operasional lintas wilayah.",
-    contributions: [
-      "Mengembangkan frontend React dan backend REST API dengan TypeScript.",
-      "Mengelola query database relasional dengan banyak tabel dan kebutuhan rekap data.",
-      "Menangani deployment aplikasi menggunakan Docker, Nginx, VPS, dan Google Cloud Platform.",
-      "Melakukan debugging masalah autentikasi, cookie, konfigurasi proxy, dan performa aplikasi.",
-    ],
-    technologies: ["React", "TypeScript", "Express", "MariaDB", "Docker", "Nginx", "GCP"],
-  },
-  {
-    company: "Tim Produk Internal",
-    position: "Backend & Infrastructure Developer",
-    period: "2023 - 2024",
-    description:
-      "Mendukung pengembangan backend, integrasi database, dan perbaikan stabilitas aplikasi internal.",
-    contributions: [
-      "Menganalisis bottleneck aplikasi dan konfigurasi database.",
-      "Menyusun pendekatan perbaikan performa berbasis observasi server dan query.",
-      "Mengevaluasi penggunaan cache dan monitoring untuk mengurangi tekanan pada database.",
-    ],
-    technologies: ["CodeIgniter", "MySQL", "Linux", "Redis", "Server Monitoring"],
-  },
+const indonesianExperiences = [
+  { company: "Instansi / Organisasi Pemerintahan", position: "Full-stack Web Developer", period: "2024 - Sekarang", description: "Membangun dan memelihara aplikasi sistem informasi untuk kebutuhan administrasi, rekap data, dan operasional lintas wilayah.", contributions: ["Mengembangkan frontend React dan backend REST API dengan TypeScript.", "Mengelola query database relasional dengan banyak tabel dan kebutuhan rekap data.", "Menangani deployment aplikasi menggunakan Docker, Nginx, VPS, dan Google Cloud Platform.", "Melakukan debugging masalah autentikasi, cookie, konfigurasi proxy, dan performa aplikasi."], technologies: ["React", "TypeScript", "Express", "MariaDB", "Docker", "Nginx", "GCP"] },
+  { company: "Tim Produk Internal", position: "Backend & Infrastructure Developer", period: "2023 - 2024", description: "Mendukung pengembangan backend, integrasi database, dan perbaikan stabilitas aplikasi internal.", contributions: ["Menganalisis bottleneck aplikasi dan konfigurasi database.", "Menyusun pendekatan perbaikan performa berbasis observasi server dan query.", "Mengevaluasi penggunaan cache dan monitoring untuk mengurangi tekanan pada database."], technologies: ["CodeIgniter", "MySQL", "Linux", "Redis", "Server Monitoring"] },
 ] as const;
+
+const englishExperiences = [
+  { company: "Government Institution / Organization", position: "Full-stack Web Developer", period: "2024 - Present", description: "Building and maintaining information systems for administration, data summaries, and operations across regions.", contributions: ["Developing React frontends and REST API backends with TypeScript.", "Managing relational database queries with many tables and reporting requirements.", "Handling application deployments with Docker, Nginx, VPS, and Google Cloud Platform.", "Debugging authentication, cookie, proxy configuration, and application performance issues."], technologies: ["React", "TypeScript", "Express", "MariaDB", "Docker", "Nginx", "GCP"] },
+  { company: "Internal Product Team", position: "Backend & Infrastructure Developer", period: "2023 - 2024", description: "Supporting backend development, database integration, and stability improvements for internal applications.", contributions: ["Analyzing application bottlenecks and database configuration.", "Designing performance improvements based on server and query observations.", "Evaluating caching and monitoring to reduce database pressure."], technologies: ["CodeIgniter", "MySQL", "Linux", "Redis", "Server Monitoring"] },
+] as const;
+
+export const experiences = { id: indonesianExperiences, en: englishExperiences } as const;

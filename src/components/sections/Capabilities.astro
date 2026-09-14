@@ -1,25 +1,29 @@
 ---
 import { Cloud, Code2, Database, Server } from "lucide-astro";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const copy = t(getLocale(Astro.currentLocale));
 
 const capabilities = [
   {
     title: "Frontend Development",
-    description: "Membangun antarmuka React dan Next.js yang responsif, terstruktur, dan nyaman digunakan untuk pekerjaan administratif.",
+    description: getLocale(Astro.currentLocale) === "en" ? "Building responsive, structured React and Next.js interfaces for administration workflows." : "Membangun antarmuka React dan Next.js yang responsif, terstruktur, dan nyaman digunakan untuk pekerjaan administratif.",
     icon: Code2,
   },
   {
     title: "Backend Development",
-    description: "Membuat REST API, autentikasi, role, dan proses bisnis menggunakan Node.js, Express, Fastify, Laravel, atau CodeIgniter.",
+    description: getLocale(Astro.currentLocale) === "en" ? "Creating REST APIs, authentication, roles, and business processes with Node.js, Express, Fastify, Laravel, or CodeIgniter." : "Membuat REST API, autentikasi, role, dan proses bisnis menggunakan Node.js, Express, Fastify, Laravel, atau CodeIgniter.",
     icon: Server,
   },
   {
     title: "Database Engineering",
-    description: "Mengelola skema, relasi tabel, query SQL, rekap data, dan analisis bottleneck pada database relasional.",
+    description: getLocale(Astro.currentLocale) === "en" ? "Managing schemas, table relationships, SQL queries, data summaries, and bottleneck analysis in relational databases." : "Mengelola skema, relasi tabel, query SQL, rekap data, dan analisis bottleneck pada database relasional.",
     icon: Database,
   },
   {
     title: "Deployment & Infrastructure",
-    description: "Menyiapkan deployment dengan Docker, Nginx, Linux, VPS, Google Cloud Platform, dan konfigurasi reverse proxy.",
+    description: getLocale(Astro.currentLocale) === "en" ? "Preparing deployments with Docker, Nginx, Linux, VPS, Google Cloud Platform, and reverse proxy configuration." : "Menyiapkan deployment dengan Docker, Nginx, Linux, VPS, Google Cloud Platform, dan konfigurasi reverse proxy.",
     icon: Cloud,
   },
 ];
@@ -28,9 +32,9 @@ const capabilities = [
 <section class="section-padding bg-[var(--surface)]">
   <div class="container-page">
     <div class="max-w-2xl">
-      <p class="badge">Kemampuan utama</p>
-      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">Fokus pada sistem web yang nyata digunakan</h2>
-      <p class="mt-4 leading-7 text-muted">Saya lebih menonjolkan cara menyelesaikan masalah teknis daripada sekadar daftar stack.</p>
+      <p class="badge">{copy.sections.capabilitiesBadge}</p>
+      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">{copy.sections.capabilitiesTitle}</h2>
+      <p class="mt-4 leading-7 text-muted">{copy.sections.capabilitiesDescription}</p>
     </div>
     <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {capabilities.map((item) => (

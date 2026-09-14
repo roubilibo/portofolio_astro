@@ -1,0 +1,26 @@
+---
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
+import TechnologyGroups from "@/components/sections/TechnologyGroups.astro";
+import { siteConfig } from "@/config/site";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const copy = t(getLocale(Astro.currentLocale));
+---
+
+<section class="container-page section-padding">
+  <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+    <div>
+      <p class="badge">{copy.sections.aboutBadge}</p>
+      <h1 class="mt-4 text-4xl font-black tracking-[0] md:text-5xl">{siteConfig.name}</h1>
+      <p class="mt-3 text-xl font-bold text-[var(--accent-strong)]">{siteConfig.position}</p>
+    </div>
+    <div class="grid gap-5 text-base leading-8 text-muted">
+      <p>{copy.pages.aboutText1}</p>
+      <p>{copy.pages.aboutText2}</p>
+      <p>{copy.pages.aboutText3}</p>
+    </div>
+  </div>
+</section>
+<ExperienceTimeline />
+<TechnologyGroups />

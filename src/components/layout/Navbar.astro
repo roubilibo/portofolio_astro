@@ -1,17 +1,25 @@
 ---
 import { Download, Github, Linkedin, Menu, Moon, Sun, X } from "lucide-astro";
-import { navItems, siteConfig } from "@/config/site";
+import { getNavItems, siteConfig } from "@/config/site";
+import { t } from "@/i18n/translations";
+import { getLocale, languageSwitchPath, localizedPath } from "@/i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const copy = t(locale);
+const navItems = getNavItems(locale);
+const otherLocale = locale === "id" ? "en" : "id";
+const languageUrl = languageSwitchPath(otherLocale, Astro.url.pathname);
 ---
 
 <header class="sticky top-0 z-50 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--background),transparent_8%)] backdrop-blur">
-  <nav class="container-page flex min-h-16 items-center justify-between gap-4" aria-label="Navigasi utama">
-    <a href="/" class="text-base font-bold tracking-[0] text-[var(--text)]" aria-label="Roubil Ridlo beranda">
+  <nav class="container-page flex min-h-16 items-center justify-between gap-4" aria-label={locale === "en" ? "Main navigation" : "Navigasi utama"}>
+    <a href={localizedPath(locale, "")} class="text-base font-bold tracking-[0] text-[var(--text)]" aria-label={`Roubil Ridlo ${copy.nav.home.toLowerCase()}`}>
       Roubil Ridlo
     </a>
 
     <div class="hidden items-center gap-1 md:flex">
       {navItems.map((item) => (
-        <a class="rounded-md px-3 py-2 text-sm font-semibold text-muted transition hover:text-[var(--text)]" href={item.href}>
+        <a class="rounded-md px-3 py-2 text-sm font-semibold text-muted transition hover:text-[var(--text)]" href={localizedPath(locale, item.path)}>
           {item.label}
         </a>
       ))}
@@ -32,7 +40,10 @@ import { navItems, siteConfig } from "@/config/site";
         class="inline-flex items-center gap-2 rounded-md bg-[var(--text)] px-4 py-2 text-sm font-bold text-white transition hover:opacity-85 dark:text-[var(--background)]"
       >
         <Download class="size-4" aria-hidden="true" />
-        Unduh CV
+        {copy.nav.cv}
+      </a>
+      <a href={languageUrl} class="rounded-md border border-[var(--border)] px-3 py-2 text-sm font-bold hover:border-[var(--accent)]" lang={otherLocale}>
+        {locale === "id" ? "EN" : "ID"}
       </a>
     </div>
 
@@ -52,7 +63,7 @@ import { navItems, siteConfig } from "@/config/site";
   <div id="mobile-menu" data-mobile-menu class="hidden border-t border-[var(--border)] bg-[var(--background)] md:hidden">
     <div class="container-page flex flex-col gap-2 py-4">
       {navItems.map((item) => (
-        <a class="rounded-md px-3 py-3 text-sm font-semibold text-muted hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href={item.href}>
+        <a class="rounded-md px-3 py-3 text-sm font-semibold text-muted hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href={localizedPath(locale, item.path)}>
           {item.label}
         </a>
       ))}
@@ -65,11 +76,14 @@ import { navItems, siteConfig } from "@/config/site";
         >
           <Sun class="hidden size-4 dark:block" aria-hidden="true" />
           <Moon class="size-4 dark:hidden" aria-hidden="true" />
-          Tema
+          {locale === "en" ? "Theme" : "Tema"}
         </button>
         <a href={siteConfig.cvUrl} class="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-md bg-[var(--text)] px-4 text-sm font-bold text-white dark:text-[var(--background)]">
           <Download class="size-4" aria-hidden="true" />
-          CV
+          {copy.nav.cv}
+        </a>
+        <a href={languageUrl} class="inline-flex h-11 items-center justify-center rounded-md border border-[var(--border)] px-4 text-sm font-bold" lang={otherLocale}>
+          {locale === "id" ? "EN" : "ID"}
         </a>
       </div>
       <div class="flex gap-2 pt-2">

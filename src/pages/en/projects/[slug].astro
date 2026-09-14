@@ -2,17 +2,17 @@
 import { getCollection } from "astro:content";
 import ProjectDetailPage from "@/components/pages/ProjectDetailPage.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
 export async function getStaticPaths() {
-  const projects = await getCollection("projects");
-  const localizedProjects = projects.filter((project) => project.data.locale === "id").sort((a, b) => Number(b.data.year) - Number(a.data.year));
-  return localizedProjects.map((project, index) => ({
+  const projects = (await getCollection("projects")).filter((project) => project.data.locale === "en").sort((a, b) => Number(b.data.year) - Number(a.data.year));
+  return projects.map((project, index) => ({
     params: { slug: project.data.slug },
-    props: { project, previousProject: localizedProjects[index - 1], nextProject: localizedProjects[index + 1] },
+    props: { project, previousProject: projects[index - 1], nextProject: projects[index + 1] },
   }));
 }
 
 const { project } = Astro.props;
-const projects = (await getCollection("projects")).filter((item) => item.data.locale === "id").sort((a, b) => Number(b.data.year) - Number(a.data.year));
+const projects = (await getCollection("projects")).filter((item) => item.data.locale === "en").sort((a, b) => Number(b.data.year) - Number(a.data.year));
 const currentIndex = projects.findIndex((item) => item.data.slug === project.data.slug);
 ---
 

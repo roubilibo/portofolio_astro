@@ -3,8 +3,13 @@ import { glob } from "astro/loaders";
 import { z } from "zod/v4";
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./src/content/projects",
+    generateId: ({ data, entry }) => `${String(data.locale ?? "id")}-${String(data.slug ?? entry)}`,
+  }),
   schema: z.object({
+    locale: z.enum(["id", "en"]).default("id"),
     title: z.string(),
     slug: z.string(),
     category: z.string(),

@@ -1,0 +1,45 @@
+---
+import { Download, Github, Linkedin, Mail, MapPin, MessageCircle } from "lucide-astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import { localizedSiteConfig, siteConfig } from "@/config/site";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const copy = t(locale);
+---
+
+<section class="container-page section-padding">
+  <div class="max-w-3xl">
+    <p class="badge">{copy.sections.contactBadge}</p>
+    <h1 class="mt-4 text-4xl font-black tracking-[0] md:text-5xl">{copy.pages.contactTitle}</h1>
+    <p class="mt-5 leading-8 text-muted">{localizedSiteConfig[locale].availability}</p>
+  </div>
+  <div class="mt-10 grid gap-5 md:grid-cols-2">
+    <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={`mailto:${siteConfig.email}`}>
+      <Mail class="size-6 text-[var(--accent)]" aria-hidden="true" />
+      <h2 class="mt-4 text-xl font-bold">{copy.sections.email}</h2>
+      <p class="mt-2 break-words text-muted">{siteConfig.email}</p>
+    </a>
+    <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.whatsapp}>
+      <MessageCircle class="size-6 text-[var(--accent)]" aria-hidden="true" />
+      <h2 class="mt-4 text-xl font-bold">{copy.sections.whatsapp}</h2>
+      <p class="mt-2 text-muted">+62852-3111-3485</p>
+    </a>
+    <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.github}>
+      <Github class="size-6 text-[var(--accent)]" aria-hidden="true" />
+      <h2 class="mt-4 text-xl font-bold">GitHub</h2>
+    </a>
+    <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.linkedin}>
+      <Linkedin class="size-6 text-[var(--accent)]" aria-hidden="true" />
+      <h2 class="mt-4 text-xl font-bold">LinkedIn</h2>
+    </a>
+  </div>
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <span class="inline-flex items-center gap-2 text-sm text-muted"><MapPin class="size-4" aria-hidden="true" /> {copy.pages.location}</span>
+    <ButtonLink href={siteConfig.cvUrl} variant="secondary">
+      <Download class="size-4" aria-hidden="true" />
+      {copy.pages.downloadCv}
+    </ButtonLink>
+  </div>
+</section>

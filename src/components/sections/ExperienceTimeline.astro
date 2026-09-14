@@ -1,15 +1,20 @@
 ---
 import { experiences } from "@/data/experience";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const copy = t(locale);
 ---
 
 <section class="section-padding">
   <div class="container-page">
     <div class="max-w-2xl">
-      <p class="badge">Pengalaman</p>
-      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">Pekerjaan yang berfokus pada sistem administrasi dan operasional</h2>
+      <p class="badge">{copy.sections.experienceBadge}</p>
+      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">{copy.sections.experienceTitle}</h2>
     </div>
     <div class="mt-10 grid gap-5">
-      {experiences.map((experience) => (
+      {experiences[locale].map((experience) => (
         <article class="surface-card rounded-lg p-6">
           <div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
             <div>

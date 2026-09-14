@@ -1,13 +1,17 @@
 ---
 import { technologyGroups } from "@/data/technologies";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const copy = t(getLocale(Astro.currentLocale));
 ---
 
 <section class="section-padding bg-[var(--surface)]">
   <div class="container-page">
     <div class="max-w-2xl">
-      <p class="badge">Teknologi</p>
-      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">Stack yang biasa digunakan</h2>
-      <p class="mt-4 leading-7 text-muted">Dikelompokkan berdasarkan area kerja, tanpa progress bar atau persentase yang sulit diverifikasi.</p>
+      <p class="badge">{copy.sections.technologyBadge}</p>
+      <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">{copy.sections.technologyTitle}</h2>
+      <p class="mt-4 leading-7 text-muted">{copy.sections.technologyDescription}</p>
     </div>
     <div class="mt-10 grid gap-4 md:grid-cols-2">
       {technologyGroups.map((group) => (

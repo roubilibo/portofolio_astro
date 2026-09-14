@@ -2,9 +2,8 @@
 import ProjectsPage from "@/components/pages/ProjectsPage.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { t } from "@/i18n/translations";
-import { getLocale } from "@/i18n/utils";
 
-const copy = t(getLocale(Astro.currentLocale));
+const copy = t("en");
 ---
 
 <BaseLayout title={`${copy.pages.projectsTitle} - Roubil Ridlo`} description={copy.pages.projectsDescription}>

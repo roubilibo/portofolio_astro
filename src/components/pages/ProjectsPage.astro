@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const copy = t(locale);
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.locale === locale)
+  .sort((a, b) => Number(b.data.year) - Number(a.data.year));
+---
+
+<section class="container-page section-padding">
+  <div class="max-w-3xl">
+    <p class="badge">{copy.pages.projectsBadge}</p>
+    <h1 class="mt-4 text-4xl font-black tracking-[0] md:text-5xl">{copy.pages.projectsTitle}</h1>
+    <p class="mt-5 leading-8 text-muted">{copy.pages.projectsDescription}</p>
+  </div>
+  <div class="mt-10 grid gap-5 lg:grid-cols-3">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+</section>

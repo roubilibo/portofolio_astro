@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import AboutPreview from "@/components/sections/AboutPreview.astro";
+import Capabilities from "@/components/sections/Capabilities.astro";
+import ContactCta from "@/components/sections/ContactCta.astro";
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
+import Hero from "@/components/sections/Hero.astro";
+import TechnologyGroups from "@/components/sections/TechnologyGroups.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import { t } from "@/i18n/translations";
+import { getLocale, localizedPath } from "@/i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const copy = t(locale);
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.locale === locale && project.data.featured)
+  .sort((a, b) => Number(b.data.year) - Number(a.data.year))
+  .slice(0, 3);
+---
+
+<Hero />
+<Capabilities />
+<section class="section-padding">
+  <div class="container-page">
+    <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-2xl">
+        <p class="badge">{copy.home.featuredBadge}</p>
+        <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">{copy.home.featuredTitle}</h2>
+        <p class="mt-4 leading-7 text-muted">{copy.home.featuredDescription}</p>
+      </div>
+      <ButtonLink href={localizedPath(locale, "projects")} variant="secondary">{copy.home.allProjects}</ButtonLink>
+    </div>
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</section>
+<ExperienceTimeline />
+<TechnologyGroups />
+<AboutPreview />
+<ContactCta />

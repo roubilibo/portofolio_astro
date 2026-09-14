@@ -1,6 +1,12 @@
 ---
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-astro";
 import { siteConfig } from "@/config/site";
+import { localizedSiteConfig } from "@/config/site";
+import { t } from "@/i18n/translations";
+import { getLocale } from "@/i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const copy = t(locale);
 ---
 
 <section class="section-padding bg-[var(--surface)]">
@@ -8,11 +14,9 @@ import { siteConfig } from "@/config/site";
     <div class="surface-card rounded-lg p-6 md:p-8">
       <div class="grid gap-8 md:grid-cols-[1fr_1.1fr] md:items-center">
         <div>
-          <p class="badge">Kontak</p>
-          <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">
-            Diskusikan kebutuhan aplikasi atau perbaikan sistem
-          </h2>
-          <p class="mt-4 leading-7 text-muted">{siteConfig.availability}</p>
+          <p class="badge">{copy.sections.contactBadge}</p>
+          <h2 class="mt-4 text-3xl font-black tracking-[0] md:text-4xl">{copy.sections.contactTitle}</h2>
+          <p class="mt-4 leading-7 text-muted">{localizedSiteConfig[locale].availability}</p>
         </div>
         <div class="grid gap-3 sm:grid-cols-2">
           <a
@@ -20,7 +24,7 @@ import { siteConfig } from "@/config/site";
             href={`mailto:${siteConfig.email}`}
           >
             <Mail class="size-5 text-[var(--accent)]" aria-hidden="true" />
-            <p class="mt-3 font-bold">Email</p>
+            <p class="mt-3 font-bold">{copy.sections.email}</p>
             <p class="mt-1 break-words text-sm text-muted">
               {siteConfig.email}
             </p>
@@ -33,7 +37,7 @@ import { siteConfig } from "@/config/site";
               class="size-5 text-[var(--accent)]"
               aria-hidden="true"
             />
-            <p class="mt-3 font-bold">WhatsApp</p>
+            <p class="mt-3 font-bold">{copy.sections.whatsapp}</p>
             <p class="mt-1 text-sm text-muted">0852-3111-3485</p>
           </a>
           <a
@@ -42,7 +46,7 @@ import { siteConfig } from "@/config/site";
           >
             <Github class="size-5 text-[var(--accent)]" aria-hidden="true" />
             <p class="mt-3 font-bold">GitHub</p>
-            <p class="mt-1 text-sm text-muted">Lihat repository</p>
+            <p class="mt-1 text-sm text-muted">{copy.sections.github}</p>
           </a>
           <a
             class="rounded-md border border-[var(--border)] p-4 hover:border-[var(--accent)]"
@@ -50,7 +54,7 @@ import { siteConfig } from "@/config/site";
           >
             <Linkedin class="size-5 text-[var(--accent)]" aria-hidden="true" />
             <p class="mt-3 font-bold">LinkedIn</p>
-            <p class="mt-1 text-sm text-muted">Profil profesional</p>
+            <p class="mt-1 text-sm text-muted">{copy.sections.linkedin}</p>
           </a>
         </div>
       </div>
