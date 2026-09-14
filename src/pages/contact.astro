@@ -1,5 +1,12 @@
 ---
-import { Download, Github, Linkedin, Mail, MapPin, MessageCircle } from "lucide-astro";
+import {
+	Download,
+	Github,
+	Linkedin,
+	Mail,
+	MapPin,
+	MessageCircle,
+} from "lucide-astro";
 import ButtonLink from "@/components/ui/ButtonLink.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { siteConfig } from "@/config/site";
@@ -22,17 +29,17 @@ import { siteConfig } from "@/config/site";
       <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.whatsapp}>
         <MessageCircle class="size-6 text-[var(--accent)]" aria-hidden="true" />
         <h2 class="mt-4 text-xl font-bold">WhatsApp</h2>
-        <p class="mt-2 text-muted">Ganti placeholder nomor di konfigurasi situs.</p>
+        <p class="mt-2 text-muted">{siteConfig.whatsapp}</p>
       </a>
       <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.github}>
         <Github class="size-6 text-[var(--accent)]" aria-hidden="true" />
         <h2 class="mt-4 text-xl font-bold">GitHub</h2>
-        <p class="mt-2 text-muted">Repository dan pekerjaan teknis.</p>
+        <p class="mt-2 text-muted">{siteConfig.github}</p>
       </a>
       <a class="surface-card rounded-lg p-5 hover:border-[var(--accent)]" href={siteConfig.linkedin}>
         <Linkedin class="size-6 text-[var(--accent)]" aria-hidden="true" />
         <h2 class="mt-4 text-xl font-bold">LinkedIn</h2>
-        <p class="mt-2 text-muted">Profil profesional dan koneksi kerja.</p>
+        <p class="mt-2 text-muted">{siteConfig.linkedin}</p>
       </a>
     </div>
 

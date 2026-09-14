@@ -5,47 +5,49 @@ import { siteConfig } from "@/config/site";
 import "@/styles/global.css";
 
 interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  type?: "website" | "article";
-  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+	title?: string;
+	description?: string;
+	image?: string;
+	type?: "website" | "article";
+	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-  title = `${siteConfig.displayName} - ${siteConfig.position}`,
-  description = siteConfig.description,
-  image = "/images/og-cover.svg",
-  type = "website",
-  structuredData = [],
+	title = `${siteConfig.displayName} - ${siteConfig.position}`,
+	description = siteConfig.description,
+	image = "/images/og-cover.svg",
+	type = "website",
+	structuredData = [],
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
 const absoluteImage = new URL(image, siteConfig.url).toString();
-const schema = Array.isArray(structuredData) ? structuredData : [structuredData];
+const schema = Array.isArray(structuredData)
+	? structuredData
+	: [structuredData];
 const baseSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.name,
-    alternateName: siteConfig.nickname,
-    jobTitle: siteConfig.position,
-    url: siteConfig.url,
-    email: siteConfig.email,
-    sameAs: [siteConfig.github, siteConfig.linkedin],
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "ID",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: `${siteConfig.displayName} Portfolio`,
-    url: siteConfig.url,
-    inLanguage: "id-ID",
-  },
-  ...schema,
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name: siteConfig.name,
+		alternateName: siteConfig.nickname,
+		jobTitle: siteConfig.position,
+		url: siteConfig.url,
+		email: siteConfig.email,
+		sameAs: [siteConfig.github, siteConfig.linkedin],
+		address: {
+			"@type": "PostalAddress",
+			addressCountry: "ID",
+		},
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: `${siteConfig.displayName} Portfolio`,
+		url: siteConfig.url,
+		inLanguage: "id-ID",
+	},
+	...schema,
 ];
 ---
 
